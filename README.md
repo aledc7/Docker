@@ -94,6 +94,10 @@ docker logs -f -t nombre_docker
 # vaciar todos los logs
 truncate -s 0 /var/lib/docker/containers/*/*-json.log
 
+# si solo se quisiera vaciar el log de un contenedor específico, hay que reemplazar el primer asterizco por el nombre de la carpeta del container. Todos los Dockers tienen su carpeta propia en:
+/var/lib/docker/containers
+
+
 
 ```
 
