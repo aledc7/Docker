@@ -63,14 +63,16 @@ docker tag
 # para poder subir imagenes a dockerhun primero debemos loguearnos
 docker login
 
-# con este comando subo mi imagen a docker hub. Previamente debo estar logueado y haber hecho el docker tag
+# con este comando subo mi imagen a docker hub.
+# Previamente debo estar logueado y haber hecho el docker tag.
 docker push   user/imagen
 
 # monitorear todos los losg e todos los dockers
 journalctl -fu docker.service
 
 
-/var/lib/docker/  # ubicacion del docker en el servidor
+# ubicacion del docker en el servidor
+/var/lib/docker/  
 
 # entrar al docker en modo log para ver lo que sucede
 docker attach
