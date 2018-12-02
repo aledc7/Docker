@@ -1,9 +1,12 @@
 # Docker - Comandos 
 
+- [x] AleDC
 
-### Este archivo contiene los comandos frecuentes que utilizo para la administracion de dockers
+
+### Este archivo contiene los comandos frecuentes que utilizo para la administracion de Dockers
 
 
+```
 
 docker info
 
@@ -64,6 +67,9 @@ manejo de puertos
 
 # Logs dentro de los dockers
 /var/lib/docker/comntainers/97734sdvxsd...
+
+
+```
 
 
 
