@@ -7,120 +7,120 @@
 
 
 
-### info completa del docker instalada
+### Info completa del docker instalada
 ```
 docker info
 ```
-### version del docker
+### Version del docker
 ```
 docker version
 ```
 
-### listar imagenes descargadas
+### Listar imagenes descargadas
 ```
 docker images
 ```
-### descargar una imágen a nuestro server
+### Descargar una imágen a nuestro server
 ```
 docker pull nombre_imagen
 ```
-### buscar imagenes en la nube
+### Buscar imagenes en la nube
 ```
 docker search nombre_imagen
 ```
 
-### listar dockers que esten corriendo
+### Listar dockers que esten corriendo
 ```
 docker ps
 ```
-### listar todos los dockers 
+### Listar todos los dockers 
 ```
 docker ps -a
 ```
-### correr un docker
+### Correr un docker
 ```
 docker run
 ```
-### correr un docker interactivo y dar acceso a su bash
+### Correr un docker interactivo y dar acceso a su bash
 ```
 docker run -it ubuntu /bin/bash
 ```
-###  arrancar, detener,reinciar docker
+###  Arrancar, detener,reinciar docker
 ```
 docker start/stop/restart
 ```
 
-### para volver a conectarse al docker
+### Para volver a conectarse al docker
 ```
 docker attach id_docker
 ```
-### borrar un docker (Atención: Proceso irreversible)
+### Borrar un docker (Atención: Proceso irreversible)
 ```
 docker rm
 ```
 
-### borrar una imagen descargada
+### Borrar una imagen descargada
 ```
 docker rmi 
 ```
 
-### acceder al bash de docker como root
+### Acceder al bash de docker como root
 ```
 docker exec -u 0 -it nombre_docker /bin/bash
 ```
 
-### acceder al basj de docker como root en caso que el docker no tenga bash
+### Acceder al basj de docker como root en caso que el docker no tenga bash
 ```
 docker exec -u 0 -it nombre_docker /busybox ash (en caso de que el docker no tenba bash)
 ```
-### listar redes del docker
+### Listar redes del docker
 ```
 docker network
 ```
 
-### crear una nueva imagen a partir de un container
+### Crear una nueva imagen a partir de un container
 ```
 docker commit nombre_docker nombre_nueva_imagen
 ```
-### para poder subir imagenes es necesario tener etiquetas
+### Para poder subir imagenes es necesario tener etiquetas
 ```
 docker tag
 ```
 
-### para poder subir imagenes a dockerhun primero debemos loguearnos
+### Para poder subir imagenes a dockerhun primero debemos loguearnos
 ```
 docker login
 ```
 
-### con este comando subo mi imagen a docker hub.
+### Con este comando subo mi imagen a docker hub.
 
 ### Previamente debo estar logueado y haber hecho el docker tag.
 ```
 docker push   user/imagen
 ```
 
-### monitorear todos los losg e todos los dockers
+### Monitorear todos los losg e todos los dockers
 ```
 journalctl -fu docker.service
 ```
 
-### ubicacion del docker en el servidor
+### Ubicacion del docker en el servidor
 ```
 /var/lib/docker/  
 ```
 
-### entrar al docker en modo log para ver lo que sucede
+### Entrar al docker en modo log para ver lo que sucede
 ```
 docker attach
 ```
 
 
-### monitorear un log en tiempo real
+### Monitorear un log en tiempo real
 ```
 docker logs -f -t nombre_docker
 ```
 
-### manejo de puertos
+### Manejo de puertos
 ### el primer número(22022) es el puerto externo expuesto a internet, el segundo número (22) es el puerto del docker interno.
 
 ```
@@ -134,11 +134,11 @@ docker logs -f -t nombre_docker
 ```
 
 
-### vaciar todos los logs
+### Vaciar todos los logs
 ```
 truncate -s 0 /var/lib/docker/containers/*/*-json.log
 ```
-### si solo se quisiera vaciar el log de un contenedor específico, hay que reemplazar el primer asterizco por el nombre de la 
+### Si solo se quisiera vaciar el log de un contenedor específico, hay que reemplazar el primer asterizco por el nombre de la 
 carpeta del container. Todos los Dockers tienen su carpeta propia en:
 ```
 /var/lib/docker/containers
