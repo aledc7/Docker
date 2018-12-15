@@ -6,7 +6,7 @@
 ### Este archivo contiene los comandos frecuentes que utilizo para la administracion de Dockers
 
 
-```
+
 ### info completa del docker instalada
 ```
 docker info
