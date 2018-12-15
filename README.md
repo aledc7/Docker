@@ -16,7 +16,7 @@ docker info
 docker version
 ```
 
-### Listar imagenes descargadas
+### Listar imágenes descargadas
 ```
 docker images
 ```
@@ -24,7 +24,7 @@ docker images
 ```
 docker pull nombre_imagen
 ```
-### Buscar imagenes en la nube
+### Buscar imgáenes en la nube
 ```
 docker search nombre_imagen
 ```
@@ -59,7 +59,7 @@ docker attach id_docker
 docker rm
 ```
 
-### Borrar una imagen descargada
+### Borrar una imágen descargada
 ```
 docker rmi 
 ```
@@ -78,21 +78,21 @@ docker exec -u 0 -it nombre_docker /busybox ash (en caso de que el docker no ten
 docker network
 ```
 
-### Crear una nueva imagen a partir de un container
+### Crear una nueva imágen a partir de un container
 ```
 docker commit nombre_docker nombre_nueva_imagen
 ```
-### Para poder subir imagenes es necesario tener etiquetas
+### Para poder subir imgáenes es necesario tener etiquetas
 ```
 docker tag
 ```
 
-### Para poder subir imagenes a dockerhun primero debemos loguearnos
+### Para poder subir imgáenes a Dockerhun primero debemos loguearnos
 ```
 docker login
 ```
 
-### Con este comando subo mi imagen a docker hub.
+### Con este comando subo mi imágen a docker hub.
 
 ### Previamente debo estar logueado y haber hecho el docker tag.
 ```
@@ -143,6 +143,38 @@ carpeta del container. Todos los Dockers tienen su carpeta propia en:
 ```
 /var/lib/docker/containers
 ```
+
+## Volúmenes en Docker
+
+Es posible crear carpetas (volúmenes) para los dockers, que permanezcan alojadas en el host, o sea fuera del Docker.
+Los volumenes se pueden listar, crear, eliminar, e inspeccionar:
+```
+docker volume ls        # Lista todos los volumenes
+docker volume create    # Crea un nuevo volumen
+docker volume inspect   # Hay que pasarle como parámetro el nombre del volumen a inspeccionar, devolverá un resumen.
+docker volume rm        # Borrar un volumen específico
+docker volume prune     # Borra todos los volumenes que no tengan asociados ningún container.
+```
+
+
+
+
+## Con el comando -v /nombre se está creando un volumen que se le asignará al container que se vaya a correr.
+## Si se accede a este docker se puede observar la caropeta nombre_volumen creada arriba con el comando -v /nombre
+
+```
+docker run -it --name ale1 -v /nombre_volumen ubuntu:1810 bash
+```
+
+## Donde se crea el volumen?
+El volumen se crea fuera del docker y permanecerá incluso luego de que el docker sea eliminado.
+La ubicación es la siguiente:
+```
+/var/lib/docker/volumes
+```
+
+
+
 
 
 
