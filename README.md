@@ -74,20 +74,27 @@ docker rmi
 docker exec -u 0 -it nombre_docker /bin/bash
 ```
 
-### Acceder al basj de docker como root en caso que el docker no tenga bash
+## Acceder al basj de docker como root en caso que el docker no tenga bash
 ```
 docker exec -u 0 -it nombre_docker /busybox ash (en caso de que el docker no tenba bash)
 ```
-### Listar redes del docker
+## Listar redes del docker
 ```
 docker network
 ```
 
-### Crear una nueva imágen a partir de un container
+## Crear una nueva imágen a partir de un container
+
+Esto es útil en los casos que personalicemos una imágen base, por ejemplo de Ubuntu, y se le agregan las herramientas básicas de monitoreo y otras utilidades como el nano. Luego queremos generar una nueva imágen de este ubuntu, para usarlo de base la próxima vez que queramos instanciar un docker. Esto nos ahorrará tiempo en tener que volver a instalar las herramientas previamente instaladas.
+aquí el comando:
 ```
 docker commit nombre_docker nombre_nueva_imagen
 ```
-### Para poder subir imgáenes es necesario tener etiquetas
+otra variante de creación de una imágen poniendole un tag a la imágen a crear, en este caso el tag será __2.1.1__
+```
+docker commit nombre_docker nombre_nueva_imagen:2.1.1
+```
+### Para poder subir imgáenes a docker hub es necesario que la imágen a subir tenga etiquetas.
 ```
 docker tag
 ```
@@ -203,6 +210,8 @@ docker history nombre_imagen
 El comando de arriba mostrará todos los cambios que se realizaron hasta obtener la imágen.
 
 
+# Dockerfile
 
+La mejor manera de crear imágenes en docker es a traves de Dockerfile
 
 
