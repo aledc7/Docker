@@ -1,4 +1,4 @@
-# Docker - Comandos 
+# Docker - Comandos y usos frecuentes
 
 - [x] AleDC
 
@@ -45,6 +45,11 @@ docker run
 ```
 docker run -it ubuntu /bin/bash
 ```
+### Correr un docker interactivo y en background (-d 'detach')
+```
+docker run -d -it ubuntu /bin/bash
+```
+
 ###  Arrancar, detener,reinciar docker
 ```
 docker start/stop/restart
@@ -104,6 +109,18 @@ docker push   user/imagen
 journalctl -fu docker.service
 ```
 
+### Ver los logs de un docker específico
+(si el docker no tiene nombre, deberá indicarsele su ID)
+```
+docker logs nombre_docker
+```
+
+### Monitorear un log en tiempo real
+```
+docker logs -f -t nombre_docker
+```
+
+
 ### Ubicacion del docker en el servidor
 ```
 /var/lib/docker/  
@@ -114,11 +131,6 @@ journalctl -fu docker.service
 docker attach
 ```
 
-
-### Monitorear un log en tiempo real
-```
-docker logs -f -t nombre_docker
-```
 
 ### Manejo de puertos
 ### el primer número(22022) es el puerto externo expuesto a internet, el segundo número (22) es el puerto del docker interno.
@@ -146,8 +158,19 @@ carpeta del container. Todos los Dockers tienen su carpeta propia en:
 
 ## Volúmenes en Docker
 
-Es posible crear carpetas (volúmenes) para los dockers, que permanezcan alojadas en el host, o sea fuera del Docker.
-Los volumenes se pueden listar, crear, eliminar, e inspeccionar:
+
+Un volumen permite compartir un directorio desde nuestro HOST al contenedor, lo cual es muy útil al momento del desarrollo.
+
+```js
+docker run --name aledc-nginx -v /home/aledc/loQueQuieroCompartir:/usr/share/nginx/html
+```
+en el ejemplo de arriba, luego del -v primero se hace referencia a la ruta de nuestro host, luego de los dos puntos se pone la referencia de la ruta dentro del contenedor.
+
+Es posible correr ese comando, indicando la ruta actual en donde nos encontremos en nuestro host mediante el comando 'pwd', esto evitará tener que escribir la ruta... aquí el ejemplo de esto:
+```js
+docker run --name aledc-nginx -v $(pwd):/usr/share/nginx/html
+```
+Aquí todos los comandos referidos a los volúmenes.
 ```
 docker volume ls        # Lista todos los volumenes
 docker volume create    # Crea un nuevo volumen
@@ -160,7 +183,7 @@ docker volume prune     # Borra todos los volumenes que no tengan asociados ning
 
 
 ## Con el comando -v /nombre se está creando un volumen que se le asignará al container que se vaya a correr.
-## Si se accede a este docker se puede observar la caropeta nombre_volumen creada arriba con el comando -v /nombre
+## Si se accede a este docker se puede observar la carpeta nombre_volumen creada arriba con el comando -v /nombre
 
 ```
 docker run -it --name ale1 -v /nombre_volumen ubuntu:1810 bash
@@ -173,7 +196,11 @@ La ubicación es la siguiente:
 /var/lib/docker/volumes
 ```
 
-
+# Ver las capas de una imágen de docker
+```
+docker history nombre_imagen
+```
+El comando de arriba mostrará todos los cambios que se realizaron hasta obtener la imágen.
 
 
 
