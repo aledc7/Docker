@@ -88,11 +88,11 @@ docker network
 Esto es útil en los casos que personalicemos una imágen base, por ejemplo de Ubuntu, y se le agregan las herramientas básicas de monitoreo y otras utilidades como el nano. Luego queremos generar una nueva imágen de este ubuntu, para usarlo de base la próxima vez que queramos instanciar un docker. Esto nos ahorrará tiempo en tener que volver a instalar las herramientas previamente instaladas.
 aquí el comando:
 ```
-docker commit nombre_docker nombre_nueva_imagen
+docker commit id_docker nombre_nueva_imagen
 ```
 otra variante de creación de una imágen poniendole un tag a la imágen a crear, en este caso el tag será __2.1.1__
 ```
-docker commit nombre_docker nombre_nueva_imagen:2.1.1
+docker commit id_docker nombre_nueva_imagen:2.1.1
 ```
 ### Para poder subir imgáenes a docker hub es necesario que la imágen a subir tenga etiquetas.
 ```
@@ -212,6 +212,15 @@ El comando de arriba mostrará todos los cambios que se realizaron hasta obtener
 
 # Dockerfile
 
-La mejor manera de crear imágenes en docker es a traves de Dockerfile
+La mejor manera de crear imágenes en docker es a traves de Dockerfile.
+
+Dockerfile es un documento de texto simple, que contiene todas las instrucciones necesarias para poder crear una imágen.
+De esta manera es posible crear una imágen personalizada y completamente automatizada.
+Cada instruccion en el dockerfile añadirá una nueva capa a la imágen, mientras mas instrucciones tenga el dockerfile mas capas tendrá, por ende mas pesado será.
+Es importante en este punto recordar el hecho de que la ideología de docker es que cada container sea para proveer un unico servicio, ya que no se trata de maquinas virtuales.
+
+
+
+ 
 
 
