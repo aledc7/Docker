@@ -231,8 +231,29 @@ FROM debian:strech
 
 docker build: este comando crea la imágen basandose en el archivo Dockerfile que se encuentre en la ubicación en donde se está ejecutando el comando.
 
-Contexto de docker:  El comando docker build toma una ruta para el contexto del build como un argumento.
+Contexto de docker:  El comando docker build necesita que se le especifique una ruta para el contexto del build como un argumento.
 Al iniciarse el proceso de build, docker copiará dentro de la imagen todos los archivos que se encuentren en el contexto.
+Para indicar la ruta actual en donde se encuentre el archivo Dockerfile se indica con un punto **.**
+
+
+el comando más básico para ejecutar un docker file creado es el que se muestra abajo, el parámetro **-t** es necesario para indicar el nombre de la imágen, luego debe indicarse la ruta del cotexto con un punto **.**
+Luego se le puede dar un tag a la imágen a crear.
+Si bien el tag es opcional, luego para poder subir la imágen a dockerhub es obligatorio que la imágen cuente con un tag.
+```
+docker build -t nombre_que_tendra_la_imagen .
+```
+
+# Buenas prácticas para crear un Dockerfile
+
+Cada vez que se indique una instrucción RUN en el dockerfile crea una nueva imágen, por lo que es recomendable concatenar todas las insrtrucciones RUN con el fin de reducir la cantidad de imagenes a crear. Para concatenar dentro de un Dockerfile se usa **&&**  para separar los comandos que se van a ejecutar.
+el caracter de la barra **/** sirve para hacer el comando multi linea, para que sea mas fácil de leer y mantener.
+
+
+
+
+
+
+
 
 
 
