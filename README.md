@@ -246,7 +246,48 @@ docker build -t nombre_que_tendra_la_imagen .
 # Buenas prácticas para crear un Dockerfile
 
 Cada vez que se indique una instrucción RUN en el dockerfile crea una nueva imágen, por lo que es recomendable concatenar todas las insrtrucciones RUN con el fin de reducir la cantidad de imagenes a crear. Para concatenar dentro de un Dockerfile se usa **&&**  para separar los comandos que se van a ejecutar.
-el caracter de la barra **/** sirve para hacer el comando multi linea, para que sea mas fácil de leer y mantener.
+el caracter de la barra ' \ ' sirve para hacer el comando multi linea, para que sea mas fácil de leer y mantener.
+Concatenar las instrucciones RUN también es muy útil para aprovechar el cache de docker y prevenir el asi llamado "Aggressive Caching"
+
+Ejemplo de la creación de una imágen de ubuntu instalando en una sola linea varios comandos. Observese que se usa una unica vez el comando RUN.
+```
+FROM ubuntu
+
+RUN apt update \
+ && apt install -y \
+ git \
+ mc \
+ nano \
+ vim \
+ net-tools \
+ sysstat \
+ iputils-ping
+```
+
+
+# Instruccion CMD 
+
+Las instrucciones CMD van a indicar que comando queremos que se ejecute cuando se inicie el contenedor. Estas instrucciones no se ejecutan al construir la imagen, solo se ejecutan cuando se instancie e inicie un contenedor. las instrucciones pueden ser en fomrato EXEC o formato SHELL
+```
+CMD ["echo" , "Hola Mundo"]
+```
+
+# Instruccion COPY
+
+Las instrucciones COPY es utilizada para copiar archivos que estén en el contexto del build y los agrega al filesystem del contenedor.
+Primeramente se debe especificar el nombre del archivo, que debe encontrase en el contexto, luego la ruta en el docker en donde querramos copiar el archivo...
+```
+COPY nombre_archivo_en_contexto.txt /ruta/nombre_en_docker.txt
+```
+
+# Instruccion ADD
+
+Es similar a la instruccion COPY con el agregado agregado de que permite descargar archivos desde Internet. 
+También permite descomprimir archivos descargados de forma automática.
+
+
+
+ 
 
 
 
