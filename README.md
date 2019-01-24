@@ -216,8 +216,31 @@ La mejor manera de crear imágenes en docker es a traves de Dockerfile.
 
 Dockerfile es un documento de texto simple, que contiene todas las instrucciones necesarias para poder crear una imágen.
 De esta manera es posible crear una imágen personalizada y completamente automatizada.
+Este permite establecer variables de entorno, instalar software, copiar contenido hacia el contenedor, o establecer el comando que se va a ejecutar predeterminadamente.
 Cada instruccion en el dockerfile añadirá una nueva capa a la imágen, mientras mas instrucciones tenga el dockerfile mas capas tendrá, por ende mas pesado será.
 Es importante en este punto recordar el hecho de que la ideología de docker es que cada container sea para proveer un unico servicio, ya que no se trata de maquinas virtuales.
+
+Primeramente se debe crear un archivo llamado __Dockefile__  con la primera letra mayscula.
+
+La primer instruccion será __FROM__ para indicar cual será la imágen base a utilizar para crear nuestra imágen personalizada.
+El parametro **-y** es necesario para que al indicar una tarea no solicite confirmación.
+
+```
+FROM debian:strech
+```
+
+docker build: este comando crea la imágen basandose en el archivo Dockerfile que se encuentre en la ubicación en donde se está ejecutando el comando.
+
+Contexto de docker:  El comando docker build toma una ruta para el contexto del build como un argumento.
+Al iniciarse el proceso de build, docker copiará dentro de la imagen todos los archivos que se encuentren en el contexto.
+
+
+
+
+
+
+
+
 
 
 
