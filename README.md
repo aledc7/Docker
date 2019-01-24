@@ -1,4 +1,8 @@
-# Docker - Comandos y usos frecuentes
+# Docker - Manual de Bolsillo
+
+Este documento contiene una recopilacion de conceptos, comandos y buenas prácticas a la hora de trabajar con Dockerfile y Docker Compose.
+
+Las mismas fueron recopiladas durante la capacitación que tomé sobre Docker.
 
 - [x] AleDC
 
@@ -231,9 +235,13 @@ FROM debian:strech
 
 docker build: este comando crea la imágen basandose en el archivo Dockerfile que se encuentre en la ubicación en donde se está ejecutando el comando.
 
-Contexto de docker:  El comando docker build necesita que se le especifique una ruta para el contexto del build como un argumento.
+# Contexto de docker
+Se define como contexto la carpeta en donde se encuentra el archivo Dockerfile, por ende en donde se ejecutará el comando docker build.
+El comando docker build necesita que se le especifique una ruta para el contexto del build como un argumento.
 Al iniciarse el proceso de build, docker copiará dentro de la imagen todos los archivos que se encuentren en el contexto.
 Para indicar la ruta actual en donde se encuentre el archivo Dockerfile se indica con un punto **.**
+
+Tengase en cuenta de que en el contexto unicamente deben encontrarse solo los documentos que queremos incluir en el docker.
 
 
 el comando más básico para ejecutar un docker file creado es el que se muestra abajo, el parámetro **-t** es necesario para indicar el nombre de la imágen, luego debe indicarse la ruta del cotexto con un punto **.**
@@ -262,6 +270,11 @@ RUN apt update \
  net-tools \
  sysstat \
  iputils-ping
+ 
+ 
+COPY aleprueba.txt /src/aleprueba.txt
+
+ 
 ```
 
 
