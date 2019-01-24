@@ -271,7 +271,9 @@ RUN apt update \
  sysstat \
  iputils-ping
  
- 
+# Configurar Zona Horaria del container a Argentina
+RUN ln -fs /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+
 COPY aleprueba.txt /src/aleprueba.txt
 
  
