@@ -82,12 +82,12 @@ docker exec -u 0 -it nombre_docker /bin/bash
 ```
 docker exec -u 0 -it nombre_docker /busybox ash (en caso de que el docker no tenba bash)
 ```
-## Listar redes del docker
+### Listar redes del docker
 ```
 docker network
 ```
 
-## Crear una nueva imágen a partir de un container
+### Crear una nueva imágen a partir de un container
 
 Esto es útil en los casos que personalicemos una imágen base, por ejemplo de Ubuntu, y se le agregan las herramientas básicas de monitoreo y otras utilidades como el nano. Luego queremos generar una nueva imágen de este ubuntu, para usarlo de base la próxima vez que queramos instanciar un docker. Esto nos ahorrará tiempo en tener que volver a instalar las herramientas previamente instaladas.
 aquí el comando:
@@ -193,21 +193,21 @@ docker volume prune     # Borra todos los volumenes que no tengan asociados ning
 
 
 
-## Con el comando -v /nombre se está creando un volumen que se le asignará al container que se vaya a correr.
-## Si se accede a este docker se puede observar la carpeta nombre_volumen creada arriba con el comando -v /nombre
+ Con el comando -v /nombre se está creando un volumen que se le asignará al container que se vaya a correr.
+ Si se accede a este docker se puede observar la carpeta nombre_volumen creada arriba con el comando -v /nombre
 
 ```
 docker run -it --name ale1 -v /nombre_volumen ubuntu:1810 bash
 ```
 
-## Donde se crea el volumen?
+### Donde se crea el volumen?
 El volumen se crea fuera del docker y permanecerá incluso luego de que el docker sea eliminado.
 La ubicación es la siguiente:
 ```
 /var/lib/docker/volumes
 ```
 
-# Ver las capas de una imágen de docker
+### Ver las capas de una imágen de docker
 ```
 docker history nombre_imagen
 ```
@@ -235,7 +235,7 @@ FROM debian:strech
 
 docker build: este comando crea la imágen basandose en el archivo Dockerfile que se encuentre en la ubicación en donde se está ejecutando el comando.
 
-# Contexto de docker
+### Contexto de docker
 Se define como contexto la carpeta en donde se encuentra el archivo Dockerfile, por ende en donde se ejecutará el comando docker build.
 El comando docker build necesita que se le especifique una ruta para el contexto del build como un argumento.
 Al iniciarse el proceso de build, docker copiará dentro de la imagen todos los archivos que se encuentren en el contexto.
@@ -251,7 +251,7 @@ Si bien el tag es opcional, luego para poder subir la imágen a dockerhub es obl
 docker build -t nombre_que_tendra_la_imagen .
 ```
 
-# Buenas prácticas para crear un Dockerfile
+### Buenas prácticas para crear un Dockerfile
 
 Cada vez que se indique una instrucción RUN en el dockerfile crea una nueva imágen, por lo que es recomendable concatenar todas las insrtrucciones RUN con el fin de reducir la cantidad de imagenes a crear. Para concatenar dentro de un Dockerfile se usa **&&**  para separar los comandos que se van a ejecutar.
 el caracter de la barra ' \ ' sirve para hacer el comando multi linea, para que sea mas fácil de leer y mantener.
@@ -278,14 +278,14 @@ COPY aleprueba.txt /src/aleprueba.txt
 ```
 
 
-# Instruccion CMD 
+### Instruccion CMD 
 
 Las instrucciones CMD van a indicar que comando queremos que se ejecute cuando se inicie el contenedor. Estas instrucciones no se ejecutan al construir la imagen, solo se ejecutan cuando se instancie e inicie un contenedor. las instrucciones pueden ser en fomrato EXEC o formato SHELL
 ```
 CMD ["echo" , "Hola Mundo"]
 ```
 
-# Instruccion COPY
+### Instruccion COPY
 
 Las instrucciones COPY es utilizada para copiar archivos que estén en el contexto del build y los agrega al filesystem del contenedor.
 Primeramente se debe especificar el nombre del archivo, que debe encontrase en el contexto, luego la ruta en el docker en donde querramos copiar el archivo...
@@ -293,7 +293,7 @@ Primeramente se debe especificar el nombre del archivo, que debe encontrase en e
 COPY nombre_archivo_en_contexto.txt /ruta/nombre_en_docker.txt
 ```
 
-# Instruccion ADD
+### Instruccion ADD
 
 Es similar a la instruccion COPY con el agregado agregado de que permite descargar archivos desde Internet. 
 También permite descomprimir archivos descargados de forma automática.
