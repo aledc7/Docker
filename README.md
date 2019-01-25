@@ -258,23 +258,32 @@ el caracter de la barra ' \ ' sirve para hacer el comando multi linea, para que 
 Concatenar las instrucciones RUN también es muy útil para aprovechar el cache de docker y prevenir el asi llamado "Aggressive Caching"
 
 Ejemplo de la creación de una imágen de ubuntu instalando en una sola linea varios comandos. Observese que se usa una unica vez el comando RUN.
+
+Es una buena práctica ordenar los paquetes alfabeticamente
+
 ```
 FROM ubuntu
 
 RUN apt update \
  && apt install -y \
  git \
+ htop \
+ iputils-ping\
  mc \
  nano \
- vim \
  net-tools \
  sysstat \
- iputils-ping
- 
-# Configurar Zona Horaria del container a Argentina
+ tzdata \
+ vim
+# seteo la zona horaria para Argentina
 RUN ln -fs /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
-COPY aleprueba.txt /src/aleprueba.txt
+
+# COPY aleprueba.txt /src/aleprueba.txt
+
+# CMD ["echo", "Pruebas del comando CMD dentro del Dockerfile]
+
+
 
  
 ```
@@ -302,7 +311,36 @@ También permite descomprimir archivos descargados de forma automática.
 
 
 
- 
+### Subiendo Imágenes a DockerHUB
+
+Para subir una imágen que tengamos localmente y querramos tener disponible en dockerhub estos son los pasos
+Prerequisitos: tener una cuenta de DockerHub.
+
+1 - Se le debe poner a la imágen el tag con nuestro usuario de dockerhub con el siguiente comando
+```
+docker tag id_de_imagen usuario_de_dockerhub/nombre_de_la_imagen
+
+# aca un ejemplo con el id de una de mis imagenes, lugo mi usuario, y el nombre que le quiero dar.
+docker tag f694e1b3c573 aledc/ubuntu_with_tools
+```
+2 - ahora si ejecutamos __docker images__ deberíamos ver la imágen con nuestro usuario de dockerhub.
+El paso siguiente es hacer login desde la terminal con nuestras credenciales de dockerhub:
+``` 
+docker login
+```
+se solicitará user y pass... si todo fue bien deberíamos ver __Login Succeeded__
+
+3 - el último paso es subir la imagen con el comando docker push seguido del nombre del  usuario/imagen
+
+```
+docker push aledc/ubuntu_with_tools
+```
+En el paso anterior comenzará a subir la imágen , si todo termina bien, en el últmo paso de la subida mostrará el SHA de la imágen subida.
+```
+latest: digest: sha256:88720c53dd13aa676b485c7f7fbb8bc9f1d8e10221cfcc81af701259274208d0 size: 1574
+```
+
+
 
 
 
