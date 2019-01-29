@@ -1,0 +1,53 @@
+# partimos de la imágen base de ubuntu 1604
+FROM ubuntu:16.04
+
+LABEL MAINTAINER="Ale DC"
+
+RUN apt-get update \
+ # instalo las dependencias para usar UTF8 ya que php lo usa.
+  &amp;&amp; apt-get install -y locales \
+  &amp;&amp; locale-gen en_US.UTF-8
+
+# agrego estas variables de entorno con ENV y configuro UTF8  para idioma Ingles
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+
+# instalo todos los paquetes que necesito para tener un buen container de PHP
+RUN apt-get update \
+   &amp;&amp; apt-get install -y \
+    curl \
+    git \
+    software-properties-common \
+    unzip \
+    zip \
+   &amp;&amp; add-apt-repository -y ppa:ondrej/php \
+   &amp;&amp; apt-get update \
+   &amp;&amp; apt-get install -y \
+    php7.2-cli \
+    php7.2-curl \
+    php7.2-fpm \
+    php7.2-gd \
+    php7.2-imap \
+    php7.2-mbstring \
+    php7.2-mysql \
+    php7.2-pgsql \
+    php7.2-xml \
+    php-memcached \
+    # instalo composer dentro de PHP ya que lo voy  a usar
+   &amp;&amp; php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
+   # es necesario crear esta carpeta para los Process ID de docker
+  &amp;&amp; mkdir /run/php \
+  # remuevo software properties  y demas paquetes para hacer una limpieza de archivos innecesarios
+  &amp;&amp; apt-get remove -y --purge software-properties-common \
+  &amp;&amp; apt-get clean \
+  &amp;&amp; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ # copio estos dos archivos que ya tengo en el contexto de PHP para lograr configurar PHP segun mis necesidades
+# estos dos archivos estan disponibles aqui: https://github.com/aledc7/Docker/tree/master/context/php
+COPY php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
+COPY www.conf /etc/php/7.2/fpm/pool.d/www.conf
+
+# expongo el puerto 9000
+EXPOSE 9000
+# este es el comando predeterminado que ejecutará la imágen al ser corrida co docker run
+CMD ["php-fpm7.2"]
