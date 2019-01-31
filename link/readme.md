@@ -9,10 +9,10 @@ docker run -d \
 # Iniciar contenedor de MySQL
 docker run -d \
     --name=mysql \
-    -e MYSQL_ROOT_PASSWORD=root \
-    -e MYSQL_DATABASE=styde \
-    -e MYSQL_USER=styde \
-    -e MYSQL_PASSWORD=secret \
+    -e MYSQL_ROOT_PASSWORD=aledc_Password \
+    -e MYSQL_DATABASE=aledc \
+    -e MYSQL_USER=aledc \
+    -e MYSQL_PASSWORD=ale_password \
     mysql:5.7
  
 # Iniciar el contenedor de PHP-FPM
@@ -21,15 +21,15 @@ docker run -d \
     -v $(pwd)/application:/var/www/html \
     --link redis \
     --link mysql \
-    stydedocker/php
+    aledc/php
  
 # Iniciar el contenedor de Nginx
 docker run -d \
     --name nginx \
-    -p 80:80 \
+    -p 3001:80 \
     -v $(pwd)/application:/var/www/html \
     --link php \
-    stydedocker/nginx
+    aledc/nginx
 ```
 
 luego es posible verificar si los contenedores están enlazados poniendo este código en el archivo index.php que ejecutará el servidor de nginx
@@ -37,12 +37,12 @@ luego es posible verificar si los contenedores están enlazados poniendo este c�
 ```php
 
 <?php
-echo "Hostname 'redis' can be found at: " . gethostbyname('redis')."\n";
+echo "Hostname 'redis' pudo encontrarse en: " . gethostbyname('redis')."\n";
 
-$hostname='mysql';
-$username='app-user';
-$password='app-pass';
-$dbname='my-app';
+$hostname='poner_el_host';
+$username='poner_el_user';
+$password='poner_el_pass';
+$dbname='poner_nombre_base';
 
 try {
     $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password, [
@@ -53,3 +53,5 @@ try {
     echo $e->getMessage();
 }
 ```
+
+de esta manera vemos como linkear varios contenedores con el comando __--linm nombre_contenedor__
