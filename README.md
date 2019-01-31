@@ -340,6 +340,15 @@ En el paso anterior comenzará a subir la imágen , si todo termina bien, en el 
 latest: digest: sha256:88720c53dd13aa676b485c7f7fbb8bc9f1d8e10221cfcc81af701259274208d0 size: 1574
 ```
 
+### Linkeando dos contenedores
+
+
+Para que dos o mas contenedores puedan verse y comunicarse entre ellos, existen varias posibilidades, una de ellas bastante simple consiste en usar el comando  __--link nombre_container_a_enlazar__ a la hora de hacer el docker run, aquí un ejemplo:
+```
+docker run  -d --name nginx -v $(pwd)/application:/var/www/html -p 3001:80 --link php aledc/nginx
+```
+en el ejemplo de arriba, estoy linkeando el contenedor que estoy por lanzar conotro contenedor existente llamado __php__
+En este caso el enlace lo hago en la parte que pongo __--link php__  y con eso será suficiente para que ambos contenedores puedan verse e intercambiar informacion
 
 
 
