@@ -1,5 +1,12 @@
 # Ejemplos de como linkear varios contenedores con el comando --link
 
+Para enlazar dos contenedores existen varias formas, una de ellas consiste en indicar en el momento de hacer el docker run el comando __--link__ seguido del nombre o id del contenedor que se quiera enlazar.
+De esta manera se creará un enlace entre los contenedores y esto permitirá la comunicación entre estos
+
+aquí alguns ejemplos de docker run utilizando __--link__
+
+
+
 ```js
 # Iniciar contenedor de Redis
 docker run -d \
