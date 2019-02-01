@@ -62,3 +62,33 @@ try {
 ```
 
 de esta manera vemos como linkear varios contenedores con el comando __--linm nombre_contenedor__
+
+
+
+También es posible verificar que los contenedores estén linkeados accediendo a estos y luego revisando el archivo HOST
+
+Primero acceder al docker corriendo con este comando:
+```
+docker exec -it php bash
+```
+Luego leer el archivo hosts para ver el contenido:
+```
+cat /etc/hosts
+```
+si los contenedores están linkeados el resultado debera ser como el siguiente:
+```
+127.0.0.1	localhost
+::1	localhost ip6-localhost ip6-loopback
+fe00::0	ip6-localnet
+ff00::0	ip6-mcastprefix
+ff02::1	ip6-allnodes
+ff02::2	ip6-allrouters
+
+# Estos son los enlaces que se agregaron mediante el comando --link en los contenedores:
+172.17.0.3	redis 818acceaa21d
+172.17.0.2	mysql 60e91d6d3357
+172.17.0.4	eeda895ee2aa
+```
+
+
+
