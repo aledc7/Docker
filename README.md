@@ -36,6 +36,8 @@ docker search nombre_imagen
 ### Listar dockers que esten corriendo
 ```
 docker ps
+
+docker ps -q (muestra las ids de todos los dockers corriendo)
 ```
 ### Listar todos los dockers 
 ```
