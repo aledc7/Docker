@@ -59,10 +59,17 @@ docker run -d -it ubuntu /bin/bash
 docker start/stop/restart
 ```
 
-### Para volver a conectarse al docker
+### Monitorear todo lo que sucede con un contenedor con Docker Attach
 ```
 docker attach id_docker
 ```
+
+### acceder a un contenedor en ejecucion
+```
+docker exec -it nombre_contenedor bash
+```
+
+
 ### Borrar un docker (Atención: Proceso irreversible)
 ```
 docker rm
