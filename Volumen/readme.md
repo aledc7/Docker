@@ -8,7 +8,7 @@ Existen dos tipos de volúmenes en Docker, los que son para almacenar y los que 
 
 ## ejemplo de dos contenedores compartiendo el mismo volumen
 
-```
+```js
 # Crear contenedor de PHP
 docker run -d \
 --name php \
@@ -33,7 +33,7 @@ docker volume ls
 
 el resultado será parecido a este:
 
-```
+```js
 DRIVER              VOLUME NAME
 local               2da27f9739f45816aab69a7caa078fae002c15b93478d31c79f40af2d7b29aa1
 local               3715b0751a3cf254005216242c29b8d8bcb3adae11e3331a9ee8dfe7bfcb3006
@@ -53,7 +53,7 @@ docker volume create nombre_volumen
 ```
 una vez tengamos creado el volumen, este debe ser montado a un contenedor, esto debe hacerse en el momento de crear el contenedor.
 
-```
+```js
 docker run -d \
 --name mysql \
 --network stydenet \
@@ -70,7 +70,7 @@ mysql:5.7
 Una vez que el contenedor esté haciendo uso de un volumen, podemos revisar en dónde se encuentra montado dicho volumen.
 Si ejecutamos __docker inspect nombre_del_volumen__ veremos un array con un objeto que nos brinda entre otras cosas la info de donde se encuentra montado el volumen (__"Mountpoint":__)
 
-```
+```js
 root: docker inspect root_mariadb_data 
 [
     {
