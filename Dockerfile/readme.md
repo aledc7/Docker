@@ -1,6 +1,13 @@
 ## Dockerfile y Buenas Practicas
 
 
+
+
+
+docker build -t aledc/php
+
+
+
 Para un buen dockerfile es fundamental concatenar las instrucciones haciendo uso del doble ampersand __&&__  
 De esta manera es posible concatenar todas las instrucciones RUN lo cual nos creará una imágen mas ligera.
 La barra invertida '\' nos sirve para realizar los saltos de linea y así no tener una sola linea.
