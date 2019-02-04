@@ -12,17 +12,17 @@ Existen dos tipos de volúmenes en Docker, los que son para almacenar y los que 
 # Crear contenedor de PHP
 docker run -d \
 --name php \
---network stydenet \
+--network aledc \
 -v $(pwd)/application:/var/www/html \ # Compartir el directorio application de nuestro equipo local
-stydedocker/php
+aledc/php
  
 # Crear contenedor de Nginx
 docker run -d \
 --name nginx \
---network stydenet \
+--network aledc \
 -v $(pwd)/application:/var/www/html \ # Compartir el directorio application de nuestro equipo local
 -p 8080:80 \
-stydedocker/nginx
+aledc/nginx
 ```
 
 es posible listar los todos los volumenes en docker con el comando __docker volume ls__
@@ -56,13 +56,13 @@ una vez tengamos creado el volumen, este debe ser montado a un contenedor, esto 
 ```js
 docker run -d \
 --name mysql \
---network stydenet \
+--network aledc \
 -v mysqldata:/var/lib/mysql \ # Indicar volumen nombrado
 -p 33060:3306 \
 -e MYSQL_ROOT_PASSWORD=root \
--e MYSQL_DATABASE=styde \
--e MYSQL_USER=styde \
--e MYSQL_PASSWORD=styde \
+-e MYSQL_DATABASE=aledc \
+-e MYSQL_USER=aledc \
+-e MYSQL_PASSWORD=aledc \
 mysql:5.7
 ```
 
