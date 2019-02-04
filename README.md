@@ -2,6 +2,12 @@
 
 Este documento contiene una recopilacion de conceptos, comandos y buenas prácticas a la hora de trabajar con Dockerfile y Docker Compose.
 
+Así mismo, cada carpeta en este repositorio contiene info detallada sobre los temas:
+- Dockerfile
+- Docker Volume
+- Docker Network
+- Docker-compose
+
 Las mismas fueron recopiladas durante la capacitación que tomé sobre Docker.
 
 - [x] AleDC
