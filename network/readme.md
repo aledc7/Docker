@@ -1,4 +1,4 @@
-# Docker Network sirve para manejar todo lo referido a redes en Dockers
+# Docker Network es el comando para el manejo de todo lo referido a redes dentro de Dockers
 
 Predeterminadamente cuando se instala Docker, viene con 3 redes:  
 - bridge  
