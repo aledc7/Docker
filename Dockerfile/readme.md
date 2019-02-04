@@ -40,7 +40,7 @@ Se copia el siguiente Dockerfile para crear una imágen de PHP con todo el códi
 
 
 
-```
+```js
 # partimos de la imágen base de ubuntu 1604
 FROM ubuntu:16.04
 
