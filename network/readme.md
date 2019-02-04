@@ -15,13 +15,14 @@ para crear una red solo basta con indicar este comando:
 docker network create nombre_Red
 ```
 
-luego al momento de lanzar un contenedor podemos vincularlo con al red anteriormente creada mediante el comando __--network nombre_red__ 
+luego al momento de lanzar un contenedor podemos vincularlo con al red anteriormente creada mediante el comando:   
+__--network nombre_red__ 
 
 ```
 docker run -d --name redis redis:alpine --network aledc aledc/redis
 ```
 
-De esta manera el contenedor de redis tiene asignada la red __aledc__ 
+De esta manera el contenedor de redis tiene ahora asignada la red __aledc__ 
 
 por consiguiente si corro otro navegador y le asigno la misma red, estos dos contenedores quedarán enlazados
 
@@ -31,7 +32,9 @@ docker run -d --name php --network aledc aledc/php
 
 De esta manera ahora los contenedores __redis__ y __php__  estan enlazados y pueden comunicarse.
 
-Para verificar esto, existen varias formas, en mi opinión la mas sencilla es inspeccionar la red que se le asignó al contenedor, y verificar que el contenedor figure en la descripcion de la red.  Es posible inspeccionar una red creada con el comando __docker inspect nombre_red__
+Para verificar esto, existen varias formas, en mi opinión la mas sencilla consiste en inspeccionar la red creada.
+
+Al inspeccionar la red, veremos todos los datos de interes de esta red, como los contenedores que tengan asignada esta red, y la dirección IP de cada contenedor. El comando en cuestion es:  __docker inspect nombre_red__
 
 ```
 docker inspect aledc
@@ -103,4 +106,33 @@ Ademas de verificar a que contenedores pertenece la red, también nos puede inte
 ]
 
 ```
+
+NOTA: existe un paquete llamado __jq__ que permite visualizar los archivos json en terminal con colores y de una manera mas agradable, para instalara este paquete:
+```
+apt-get install jq
+```
+luego para usarlo basta con pasar el comando que queramos seguido de __|jq__   
+
+```
+docker inspect aledc |jq
+```
+
+
+
+
+### Agregando una red a un contenedor ya creado
+
+Puede darse el caso que querramos vincular una red con un contenedor que ya se encuentre corriendo y no nos sea posible detener este contenedor para volver a hacer el docker run. 
+Para agregar una red a un contenedor corriendo el comando es __docker network connect nombre_red nombre_contenedor
+
+en este ejemplo estaría agregando la red aledc al contenedor llamado php.
+
+
+```
+docker network connect aledc php
+```
+
+NOTA: en caso de que el contenedor no tenga nombre, tendrémos que usar su ID.
+
+De esta manera hemos aprendido como vincular contenedores a traves de crear.
 
