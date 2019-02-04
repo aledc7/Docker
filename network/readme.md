@@ -15,7 +15,7 @@ para crear una red solo basta con indicar este comando:
 docker network create nombre_Red
 ```
 
-luego al momento de lanzar un contenedor podemos vincularlo con al red anteriormente creada
+luego al momento de lanzar un contenedor podemos vincularlo con al red anteriormente creada mediante el comando __--network nombre_red__ 
 
 ```
 docker run -d --name redis redis:alpine --network aledc aledc/redis
