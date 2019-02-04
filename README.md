@@ -14,8 +14,7 @@ Las mismas fueron recopiladas durante la capacitación que tomé sobre Docker.
 - [x] AleDC
 
 
-### Este archivo contiene los comandos frecuentes que utilizo para la administracion de Dockers
-
+_______________________________________________________________________________________________________________________
 
 
 ### Info completa del docker instalada
