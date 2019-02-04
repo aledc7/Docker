@@ -5,7 +5,7 @@ Este documento contiene una recopilacion de conceptos, comandos y buenas prácti
 Así mismo, cada carpeta en este repositorio contiene info detallada sobre los temas:
 - Dockerfile
 - Docker Volume
-- Docker link
+- Docker Link
 - Docker Network
 - Docker-compose
 
