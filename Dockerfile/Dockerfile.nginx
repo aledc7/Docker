@@ -3,18 +3,18 @@ FROM ubuntu:18.10
 LABEL MAINTAINER="Ale DC"
 
 RUN apt-get update \
-  &amp;&amp; apt-get install -y nginx \
+  && apt-get install -y nginx \
 
   # limpio los archivos que se generaron durante la instalacion 
-  &amp;&amp; apt-get clean \
-  &amp;&amp; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 
   # creo dos enlaces simbolicos a los logs de nginx tanto de los accesos como de los errores
-  &amp;&amp; ln -sf /dev/stdout /var/log/nginx/access.log \
-  &amp;&amp; ln -sf /dev/stderr /var/log/nginx/error.log \
+  && ln -sf /dev/stdout /var/log/nginx/access.log \
+  && ln -sf /dev/stderr /var/log/nginx/error.log \
 
   # esta linea es para que no se ejecute en el background
-  &amp;&amp; echo "daemon off;" &gt;&gt; /etc/nginx/nginx.conf
+  && echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # copio el archivo 'default' que tengo creado en el contexto y lo copio en la ruta en donde esta la configuracion de Nginx
 COPY default /etc/nginx/sites-available/default
