@@ -68,7 +68,7 @@ mysql:5.7
 
 ### Inspeccionar volúmenes
 Una vez que el contenedor esté haciendo uso de un volumen, podemos revisar en dónde se encuentra montado dicho volumen.
-Si ejecutamos __docker inspect nombre_del_volumen__ veremos un array con un objeto que nos brinda entre otras cosas la info de donde se encuentra montado el volumen (__Mountpoint__)
+Si ejecutamos __docker inspect nombre_del_volumen__ veremos un array con un objeto que nos brinda entre otras cosas la info de donde se encuentra montado el volumen (__"Mountpoint":__)
 
 ```
 root: docker inspect root_mariadb_data 
