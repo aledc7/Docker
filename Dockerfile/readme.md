@@ -1,46 +1,128 @@
-## Dockerfile y Buenas Practicas
+# Dockerfile
+
+La mejor manera de crear imágenes en docker es a traves de Dockerfile.
+
+Dockerfile es un documento de texto simple, que contiene todas las instrucciones necesarias para poder crear una imágen.
+De esta manera es posible crear una imágen personalizada y completamente automatizada.
+Este permite establecer variables de entorno, instalar software, copiar contenido hacia el contenedor, o establecer el comando que se va a ejecutar predeterminadamente.
+Cada instruccion en el dockerfile añadirá una nueva capa a la imágen, mientras mas instrucciones tenga el dockerfile mas capas tendrá, por ende mas pesado será.
+Es importante en este punto recordar el hecho de que la ideología de docker es que cada container sea para proveer un unico servicio, ya que no se trata de maquinas virtuales.
+
+Primeramente se debe crear un archivo llamado __Dockefile__  con la primera letra mayscula.
+
+La primer instruccion será __FROM__ para indicar cual será la imágen base a utilizar para crear nuestra imágen personalizada.
+El parametro **-y** es necesario para que al indicar una tarea no solicite confirmación.
+
+```
+FROM debian:strech
+```
+
+__docker build:__ este comando crea la imágen basandose en el archivo Dockerfile que se encuentre en la ubicación en donde se está ejecutando el comando.
+
+### Contexto de docker
+Se define como contexto la carpeta en donde se encuentra el archivo Dockerfile, por ende en donde se ejecutará el comando docker build.
+El comando docker build necesita que se le especifique una ruta para el contexto del build como un argumento.
+Al iniciarse el proceso de build, docker copiará dentro de la imagen todos los archivos que se encuentren en el contexto.
+Para indicar la ruta actual en donde se encuentre el archivo Dockerfile se indica con un punto **.**
+
+Tengase en cuenta de que en el contexto unicamente deben encontrarse solo los documentos que queremos incluir en el docker.
+
+
+el comando más básico para ejecutar un docker file creado es el que se muestra abajo, el parámetro **-t** es necesario para indicar el nombre de la imágen, luego debe indicarse la ruta del cotexto con un punto **.**
+Luego se le puede dar un tag a la imágen a crear.
+Si bien el tag es opcional, luego para poder subir la imágen a dockerhub es obligatorio que la imágen cuente con un tag.
+```
+docker build -t nombre_que_tendra_la_imagen .
+```
+
+### Buenas prácticas para crear un Dockerfile
+
+Cada vez que se indique una instrucción RUN en el dockerfile crea una nueva imágen, por lo que es recomendable concatenar todas las insrtrucciones RUN con el fin de reducir la cantidad de imagenes a crear. Para concatenar dentro de un Dockerfile se usa **&&**  para separar los comandos que se van a ejecutar.
+el caracter de la barra ' \ ' sirve para hacer el comando multi linea, para que sea mas fácil de leer y mantener.
+Concatenar las instrucciones RUN también es muy útil para aprovechar el cache de docker y prevenir el asi llamado "Aggressive Caching"
+
+Ejemplo de la creación de una imágen de ubuntu instalando en una sola linea varios comandos. Observese que se usa una unica vez el comando RUN.
+
+Es una buena práctica ordenar los paquetes alfabeticamente
+
+```
+FROM ubuntu
+
+RUN apt update \
+ && apt install -y \
+ git \
+ htop \
+ iputils-ping\
+ mc \
+ nano \
+ net-tools \
+ sysstat \
+ tzdata \
+ vim
+# seteo la zona horaria para Argentina
+RUN ln -fs /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+
+
+# COPY aleprueba.txt /src/aleprueba.txt
+
+# CMD ["echo", "Pruebas del comando CMD dentro del Dockerfile]
 
 
 
+ 
+```
 
 
-docker build -t aledc/php
+### Instruccion CMD 
+
+Las instrucciones CMD van a indicar que comando queremos que se ejecute cuando se inicie el contenedor. Estas instrucciones no se ejecutan al construir la imagen, solo se ejecutan cuando se instancie e inicie un contenedor. las instrucciones pueden ser en fomrato EXEC o formato SHELL
+```
+CMD ["echo" , "Hola Mundo"]
+```
+
+### Instruccion COPY
+
+Las instrucciones COPY es utilizada para copiar archivos que estén en el contexto del build y los agrega al filesystem del contenedor.
+Primeramente se debe especificar el nombre del archivo, que debe encontrase en el contexto, luego la ruta en el docker en donde querramos copiar el archivo...
+```
+COPY nombre_archivo_en_contexto.txt /ruta/nombre_en_docker.txt
+```
+
+### Instruccion ADD
+
+Es similar a la instruccion COPY con el agregado agregado de que permite descargar archivos desde Internet. 
+También permite descomprimir archivos descargados de forma automática.
 
 
 
-Para un buen dockerfile es fundamental concatenar las instrucciones haciendo uso del doble ampersand __&&__  
-De esta manera es posible concatenar todas las instrucciones RUN lo cual nos creará una imágen mas ligera.
-La barra invertida '\' nos sirve para realizar los saltos de linea y así no tener una sola linea.
+### Subiendo Imágenes a DockerHUB
 
-## Instrucción FROM
-La instrucción FROMes la primer instrucción que escribimos dentro de un Dockerfile y nos indica cuál es la imagen que se va a tomar como base para crear nuestra imagen.
+Para subir una imágen que tengamos localmente y querramos tener disponible en dockerhub estos son los pasos
+Prerequisitos: tener una cuenta de DockerHub.
 
+1 - Se le debe poner a la imágen el tag con nuestro usuario de dockerhub con el siguiente comando
+```
+docker tag id_de_imagen usuario_de_dockerhub/nombre_de_la_imagen
 
-## Instrucción RUN
-La instrucción RUN va a ejecutar todos los comandos que necesitemos para poder crear nuestra imagen, estos son comandos que normalmente podemos utilizar en una terminal, tomando como base la imagen base, es decir, si nuestro archivo Dockerfile está tomando como base una imagen de Debian podremos hacer uso de comandos que normalmente se encuentran en bash, pero si utilizamos una imagen base de Alpine, los  comandos de bash no estarán disponibles ya que esta imagen no contiene bash, en su lugar utiliza otro shell más simple llamado sh por lo que los comandos dentro de esta instrucción deberán corresponder a este shell.
+# aca un ejemplo con el id de una de mis imagenes, lugo mi usuario, y el nombre que le quiero dar.
+docker tag f694e1b3c573 aledc/ubuntu_with_tools
+```
+2 - ahora si ejecutamos __docker images__ deberíamos ver la imágen con nuestro usuario de dockerhub.
+El paso siguiente es hacer login desde la terminal con nuestras credenciales de dockerhub:
+``` 
+docker login
+```
+se solicitará user y pass... si todo fue bien deberíamos ver __Login Succeeded__
 
-## Instrucción CMD
-Esta instrucción se utiliza para especificar el comando por defecto que se va a utilizar al crear un contenedor con esta imagen. Normalmente es utilizada para indicar qué comando va a iniciar la tarea para la que está hecha la imagen. Por ejemplo, si nuestra imagen está pensada para ejecutar Nginx, esta instrucción deberá contener el comando necesario para ejecutar Nginx.
+3 - el último paso es subir la imagen con el comando docker push seguido del nombre del  usuario/imagen
 
-En caso de que no indiquemos una instrucción CMD, la imagen va a utilizar la instrucción proveniente de la imagen base
-
-Es recomendable encadenar los comandos dentro de esta instrucción ya que así podremos reducir el número de capas en la imagen resultante de este Dockerfile.
-
-Otra buena práctica es encadenar alfabéticamente los parámetros en caso de que algún comando los requiera, como pueden ser la instalación de paquetes. Esto puede ayudar a la legibilidad del archivo y a evitar la duplicación de parámetros.
-
-## Docker Cache
-Cuando creamos una imagen, todas las instrucciones del Dockerfile estarán añadiendo una nueva capa a la imagen, por lo que Docker va a almacenar estas instrucciones en caché para poder hacer el proceso de construcción de la imagen más rápido si se requiere volver a construirla.
-
-Si una instrucción cambia, Docker va a dejar de utilizar el caché a partir de la instrucción que fue modificada.
-
-## Instrucción COPY
-Nos sirven para poder copiar archivos y directorios que tengamos en el contexto del build hacia el contenedor. Estos archivos deben existir en el contexto, de lo contrario el proceso de construcción de la imagen se verá interrumpido y obtendremos un error.
-
-Los archivos que indiquemos en esta instrucción se copiarán al filesystem de la imagen para poder ser utilizados en los contenedores que se creen a partir de esta imagen.
-
-## Instrucción ADD
-Al igual que la instrucción COPY, esta sirve para para agregar archivos al filesystem de la imagen, pero tiene la ventaja de que nos permite obtener archivos desde internet, además de que nos permite desempaquetar archivos comprimidos de manera automática.
-
+```
+docker push aledc/ubuntu_with_tools
+```
+En el paso anterior comenzará a subir la imágen , si todo termina bien, en el últmo paso de la subida mostrará el SHA de la imágen subida.
+```
+latest: digest: sha256:88720c53dd13aa676b485c7f7fbb8bc9f1d8e10221cfcc81af701259274208d0 size: 1574
+```
 
 
 Se copia el siguiente Dockerfile para crear una imágen de PHP con todo el código comentado en donde se explica que hace cada instruccion.
