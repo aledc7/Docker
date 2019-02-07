@@ -13,9 +13,12 @@ Si no tenemos claro estos temas, claro que podremos manejar igual Docker Compose
 
 Lo primero que debemos hacer es crear en el directorio raíz de nuestro proyecto un archivo con el nombre __Docker-compose.yml__
 
-En este archivo debemos seguir la siguiente estructura, primeramente indicar la versión de Docker-compose, luego debemos indicar los 3 bloques principales que son __services__ , __networks__ , y __volumes__
+En este archivo debemos seguir la siguiente estructura, primeramente indicar la versión de Docker-compose, luego debemos indicar los 3 bloques principales que son:  
+__services__  
+__networks__   
+__volumes__  
 
-en el bloque __services:__ se especificarán los contenedores que se vana emplear para la creacion del docker-compose, junt con sus respectivas configuraciónes.
+En el bloque __services:__ se especificarán los contenedores que se vana emplear para la creacion del docker-compose, junt con sus respectivas configuraciónes.
 }
 
 
@@ -30,7 +33,7 @@ volumes:
 
 
 
-El siguiente es un ejemplo de un dockerfile con comentarios sobre cada linea para ver que es lo que se está haciendo
+El siguiente es un ejemplo completo de un dockerfile con comentarios sobre cada linea para ver que es lo que se está haciendo:
 
 
 ```js
@@ -110,9 +113,39 @@ networks:
     # este es el driver que le asigno a la red, siendo bridge el indicado para intercomunicar contenedores.
     # ese driver "bridge" es el que viene predeterminadamente, por lo que podemos no indicar nada y se asignará igual.
     driver: "bridge"
+
+# acá iran todos los volumenes que se creen y que utilizamos mas arriba para algunos contenedores
 volumes:
+  # creo el volumen redisdata y abajo especifico el driver que este volumen usará (esto último no es necesario
+  # ya que por defecto los volumenes vienen asignados con el driver 'local')
+ 
   redisdata:
     driver: "local"
   mysqldata:
     driver: "local"
 ```
+
+Una vez que tenemos terminado nuestro archivo Docker-compose.yml tenemos que hacer que se generen las imágenes que indicamos en el mismo.  esto se hace con el siguiente comando
+```js
+docker-compose build
+```
+El comando de arriba creará todas las imágenes indicadas en el archivo, y necesarias para el paso final.
+Esto lo podemos verificar con el comando __docker images__  y buscando que aparezcan las imágenes que indicamos en nuestro archivo.
+
+Finalmente estamos en condiciones de levantar nuestra aplicacion escribiendo el siguiente comando en la carpeta en donde tengamos el archivo __Docker-compose.yml__
+
+```js
+docker-compose up
+```
+Este comando creará las redes, los volumenes, y los contenedores que hayamos indicado en nuestro archivo Docker-compose.yml
+
+Podemos revisar que todo se haya creado correctamente haciendo uso del comando __docker-compose ps__  
+```js
+docker-compose ps
+```
+
+Este comando listará solamente todo lo relacionado al archivo .yml que se encuentre en donde hayamos corrido el comando.
+
+
+
+
