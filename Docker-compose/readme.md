@@ -76,7 +76,7 @@ services:
     volumes:
       - ./application:/var/www/html
     networks:
-      - stydenet
+      - red_aledc
   
   # repito lo mismo para mysql, pero esta vez en vez de crear mi propia imágen, voy a usar la imágen ofcial de mysql
   # Esta se encuentra subida en Dockerhub y se descargará y usara al momento de correr el Docker-compose.
@@ -87,10 +87,10 @@ services:
     
     # este contenedor necesita de algunas variables de entorno, estas se especifican debajo de __environment:__
     environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: styde
-      MYSQL_USER: styde
-      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: aledc
+      MYSQL_DATABASE: aledc
+      MYSQL_USER: aledc
+      MYSQL_PASSWORD: aledc
     
     
     ports:
@@ -98,18 +98,18 @@ services:
     volumes:
       - mysqldata:/var/lib/mysql
     networks:
-      - stydenet
+      - red_aledc
   redis:
     image: redis:alpine
     volumes:
       - redisdata:/data
     networks:
-      - stydenet
+      - red_aledc
 
 # acá iran todas las redes que quiero que se creen, y que ya mencioné mas arriba para asignar a algunos contenedores.
 networks:
   # este es el nombre de la red
-  stydenet:
+  red_aledc:
     # este es el driver que le asigno a la red, siendo bridge el indicado para intercomunicar contenedores.
     # ese driver "bridge" es el que viene predeterminadamente, por lo que podemos no indicar nada y se asignará igual.
     driver: "bridge"
