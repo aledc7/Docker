@@ -147,5 +147,21 @@ docker-compose ps
 Este comando listará solamente todo lo relacionado al archivo .yml que se encuentre en donde hayamos corrido el comando.
 
 
+En caso de que querramos detener todo lo que ha levantado la ejecucion de docker-compose up.... para esto existe el siguiente comando:
+
+```js
+docker-compose down
+```
+
+
+También puede darse el caso de que querramos ejecutar un comando en alguno de los contenedores levantados, esto lo hacemos mediante:
+docker-compose exec nombre_container comando
+
+```js
+docker-compose exec php sh
+```
+
+
+
 
 
