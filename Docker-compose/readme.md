@@ -161,6 +161,51 @@ docker-compose exec nombre_container comando
 docker-compose exec php sh
 ```
 
+#### Variables en Docker-compose
+
+El hecho de incluir nombres de bases de datos, usuarios, contraseñas, puertos y otra información sensible directamente en el archivo Docker-compose.yml  no es una buena práctica, ya que esaramos vulnerando la seguridad al dejar esta información persistida y sin encriptación.  
+ Una buena práctica para solucionar esto es crear un archivo oculto llamando __.env__   
+ En este archivo podremos colocar toda la información sensible que queramos definir en el docker-compose.
+ 
+Ahora bien para que esto funcione correctamente, en el archivo docker-compose debemos poner variables para así referenciar estas variables con los datos que escribamos en nuestro archivo .env
+
+Las variables en el archivo docker-compose deben declararse de esta manera:  $(NOMBRE_VARIABLE)
+Y dentro del archivo .env irán sin el signo peso ni parentesis:  NOMBRE_VARIABLE
+
+Aquí un ejemplo:
+
+
+``` 
+      # ESTA ES LA FORMA TRADICIONAL EN DONDE SE INCLUYEN LAS CREDENCIALES DIRECTAMENTE EN EL ARCHIVO docker-compose
+
+    environment:
+      MYSQL_ROOT_PASSWORD: aledc
+      MYSQL_DATABASE: aledc
+      MYSQL_USER: aledc
+      MYSQL_PASSWORD: aledc
+      
+      
+      
+      
+            # ESTA ES LA FORMA REEMPLAZADO POR VARIABLES
+
+    environment:
+      MYSQL_ROOT_PASSWORD: $(NOMBRE_VARIABLE_ROOT_PASSWORD)
+      MYSQL_DATABASE: $(NOMBRE_BASE_DE_DATOS)
+      MYSQL_USER: $(NOMBRE_USUARIO)
+      MYSQL_PASSWORD: $(PASSWORD_USUARIO)
+
+```
+
+Luego solo restará crear un archivo oculto con nombre __.env__  el cual tendrá declaradas estas variables con sus valores asignados:
+
+```
+NOMBRE_VARIABLE_ROOT_PASSWORD = password123
+NOMBRE_BASE_DE_DATOS = basedato1
+NOMBRE_USUARIO = aledc1
+PASSWORD_USUARIO = aledc123
+```
+Luego de esto, si ejecutamos docker_compose up     todo deberá funcionar igual, con la diferencia de que ahora hemos logrado separar los datos sensibles de nuestro archivo .env
 
 
 
