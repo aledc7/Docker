@@ -16,6 +16,22 @@ Las mismas fueron recopiladas durante la capacitación que tomé sobre Docker.
 
 _______________________________________________________________________________________________________________________
 
+### Correr docker sin usar sudo
+
+Para esto es necesario crear el grupo __docker__ y luego asignar tu usuario a ese grupo, para finalmente cerrar sesion y abrir nuevamente.
+
+Agrego el grupo a mi sistema ubuntu
+```
+sudo groupadd docker
+```
+
+agrego el usuario al grupo docker
+```
+sudo usermod -aG docker mi_usuario
+```
+
+
+
 
 ### Info completa del docker instalada
 ```
