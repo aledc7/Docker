@@ -210,10 +210,10 @@ Luego de esto, si ejecutamos docker_compose up     todo deberá funcionar igual,
 
 ## LOGS
 
-mediante el comando __docker-compose logs  nombre_container__  se puede monitorear los logs de alguno de los contenedores creados por el docker-compose.
-Tener presente que el nombre que se le debe pasar es el mismo que el declarado en el archivo docker-compose  y no el nombre que figura cuando hacemos un docker ps.
+Mediante el comando __docker-compose logs  nombre_container__  se puede monitorear los logs de alguno de los contenedores creados por el docker-compose.  
+Tener presente que el nombre que se le debe pasar es el mismo que el declarado en el archivo docker-compose  y no el nombre que figura cuando hacemos un docker ps.  
 
-por ejemplo, si quisieramos monitorear el contendor de redis deberiamos poner:
+Por ejemplo, si quisieramos monitorear el contendor de redis deberiamos poner:
 
  ```
  docker-compose logs redis
