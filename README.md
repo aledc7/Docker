@@ -1,4 +1,5 @@
 # Docker - Manual de Bolsillo
+:trollface:
 
 Este documento contiene una recopilacion de conceptos, comandos y buenas prácticas a la hora de trabajar con Dockerfile y Docker Compose.
 
