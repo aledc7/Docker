@@ -1,5 +1,6 @@
 # Docker - Manual de Bolsillo
-:trollface:
+
+[<img src="https://github.com/aledc7/PHP-Certification/blob/master/aledc-logo.png?raw=true">](https://aledc.com)
 
 Este documento contiene una recopilacion de conceptos, comandos y buenas prácticas a la hora de trabajar con Dockerfile y Docker Compose.
 
