@@ -11,14 +11,14 @@ De esta manera podemos crear nuestra propia red, y asi asignar esta red a los co
 
 para crear una red solo basta con indicar este comando:
 
-```
+```js
 docker network create nombre_Red
 ```
 
 luego al momento de lanzar un contenedor podemos vincularlo con al red anteriormente creada mediante el comando:   
 __--network nombre_red__ 
 
-```
+```js
 docker run -d --name redis redis:alpine --network aledc aledc/redis
 ```
 
@@ -26,7 +26,7 @@ De esta manera el contenedor de redis tiene ahora asignada la red __aledc__
 
 por consiguiente si corro otro navegador y le asigno la misma red, estos dos contenedores quedarán enlazados
 
-```
+```js
 docker run -d --name php --network aledc aledc/php
 ```
 
@@ -36,7 +36,7 @@ Para verificar esto, existen varias formas, en mi opinión la mas sencilla consi
 
 Al inspeccionar la red, veremos todos los datos de interes de esta red, como los contenedores que tengan asignada esta red, y la dirección IP de cada contenedor. El comando en cuestion es:  __docker inspect nombre_red__
 
-```
+```js
 docker inspect aledc
 ```
 
@@ -44,7 +44,7 @@ el resultaro será un array de objetos con la configuración de la red.
 Allí se deberá revisar que dentro del objeto __Containers__ se encuentren los contenedores que nos interese conectar.
 Ademas de verificar a que contenedores pertenece la red, también nos puede interesar saber que dirección IP tiene cada contenedor, de manera de hacer un ping dentro de cada contenedor para saber si tengo conexion con otro contenedor.
 
-```
+```js
 [
     {
         "Name": "aledc",
@@ -128,7 +128,7 @@ Para agregar una red a un contenedor corriendo el comando es __docker network co
 en este ejemplo estaría agregando la red aledc al contenedor llamado php.
 
 
-```
+```js
 docker network connect aledc php
 ```
 
