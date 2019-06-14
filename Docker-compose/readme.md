@@ -235,6 +235,17 @@ docker exec CONTAINER /usr/bin/mysqldump -u root --password=mi_password nombre_b
 # Para hacer Restore
 cat backup.sql | docker exec -i Nombre_CONTAINER /usr/bin/mysql -u root --password=mi_password nombre_base
 ```
+
+
+
+
+```js
+docker-compose exec nombre_container /usr/bin/mysqldump -u root --password="$MYSQL_PASSWORD" nombre_basededatos > backup_c1050278_overprt.sql
+```
+
+Tener en cuenta que para que me funcione el ejemplop de arriba, debo tener un archivo .env con la variable definida MYSQL_PASSWORD = aca_va_la_contraseña
+
+
  
  
 
