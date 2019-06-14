@@ -243,7 +243,7 @@ Aunque no es correcto indicar un password en la linea de comandos, ya que queda 
 
 
 ```js
-docker-compose exec nombre_container /usr/bin/mysqldump -u root --password="$MYSQL_PASSWORD" nombre_basededatos > backup_c1050278_overprt.sql
+docker-compose exec nombre_container /usr/bin/mysqldump -u root --password="$MYSQL_PASSWORD" nombre_basededatos > archivo_backup.sql
 ```
 
 
