@@ -175,7 +175,7 @@ Y dentro del archivo .env irán sin el signo peso ni parentesis:  NOMBRE_VARIABL
 Aquí un ejemplo:
 
 
-``` 
+```js
       # ESTA ES LA FORMA TRADICIONAL EN DONDE SE INCLUYEN LAS CREDENCIALES DIRECTAMENTE EN EL ARCHIVO docker-compose
 
     environment:
@@ -199,7 +199,7 @@ Aquí un ejemplo:
 
 Luego solo restará crear un archivo oculto con nombre __.env__  el cual tendrá declaradas estas variables con sus valores asignados:
 
-```
+```js
 NOMBRE_VARIABLE_ROOT_PASSWORD = password123
 NOMBRE_BASE_DE_DATOS = basedato1
 NOMBRE_USUARIO = aledc1
@@ -215,13 +215,13 @@ Tener presente que el nombre que se le debe pasar es el mismo que el declarado e
 
 Por ejemplo, si quisieramos monitorear el contendor de redis deberiamos poner:
 
- ```
+ ```js
  docker-compose logs redis
  ```
  
  podemos también agregar el parametro -f  para dejar una terminal abierta y monitorear en tiempo real lo que suceda.
  
- ```
+ ```js
  docker-compose logs -f redis
  ```
  
