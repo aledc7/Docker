@@ -239,9 +239,13 @@ cat backup.sql | docker exec -i Nombre_CONTAINER /usr/bin/mysql -u root --passwo
 
 
 
+Aunque no es correcto indicar un password en la linea de comandos, ya que queda registrado, lo correcto sería usar una variable en el archivo .env, como se muestra en el ejemplo de abajo.
+
+
 ```js
 docker-compose exec nombre_container /usr/bin/mysqldump -u root --password="$MYSQL_PASSWORD" nombre_basededatos > backup_c1050278_overprt.sql
 ```
+
 
 Tener en cuenta que para que me funcione el ejemplop de arriba, debo tener un archivo .env con la variable definida MYSQL_PASSWORD = aca_va_la_contraseña
 
