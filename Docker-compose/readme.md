@@ -226,4 +226,15 @@ Por ejemplo, si quisieramos monitorear el contendor de redis deberiamos poner:
  ```
  
  
+ # Hacer Backup y Restaurar Bases de Datos de Contenedores Corriendo.
+ 
+ ````
+ # Para Backup
+docker exec CONTAINER /usr/bin/mysqldump -u root --password=mi_password nombre_base > backup.sql
+
+# Para hacer Restore
+cat backup.sql | docker exec -i Nombre_CONTAINER /usr/bin/mysql -u root --password=mi_password nombre_base
+ ```
+ 
+ 
 
