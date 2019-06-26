@@ -1,3 +1,13 @@
+[![aledc.com](https://github.com/aledc7/Scrum-Certification/blob/master/recursos/aledc.com.svg)](https://aledc.com)
+[![License](https://github.com/aledc7/Scrum-Certification/blob/master/recursos/mit-license.svg)](https://aledc.com)
+[![GitHub release](https://github.com/aledc7/Scrum-Certification/blob/master/recursos/release.svg)](https://aledc.com)
+[![Dependencies](https://github.com/aledc7/Scrum-Certification/blob/master/recursos/dependencias-none.svg)](https://aledc.com)
+
+- [x] aledc.com
+- [x] MIT License
+- [x] Tested Code
+
+
 # Docker Compose
 
 Para hacer un buen uso de Docker Compose es altamente recomendable dominar los siguientes temas:
@@ -7,7 +17,7 @@ Para hacer un buen uso de Docker Compose es altamente recomendable dominar los s
 - Docker Networks
 
 
-Si no tenemos claro estos temas, claro que podremos manejar igual Docker Compose, pero no sabrémos bien que es lo que estamos haciendo y porqué lo hacemos.
+Si no tenemos claro estos temas, igual podremos manejar igual Docker Compose, pero no sabrémos bien que es lo que estamos haciendo y porqué lo hacemos.
 
 
 
@@ -231,12 +241,15 @@ Por ejemplo, si quisieramos monitorear el contendor de redis deberiamos poner:
  
  podemos también agregar el parametro -f  para dejar una terminal abierta y monitorear en tiempo real lo que suceda.
  
+ 
+ ## Log seguidor (follow)
+ 
  ```js
  docker-compose logs -f redis
  ```
  
  
- # Hacer Backup y Restaurar Bases de Datos de Contenedores Corriendo.
+ ## Hacer Backup y Restaurar Bases de Datos de Contenedores Corriendo.
  
  ```js
  # Para Backup
