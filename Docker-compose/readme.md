@@ -219,6 +219,16 @@ Por ejemplo, si quisieramos monitorear el contendor de redis deberiamos poner:
  docker-compose logs redis
  ```
  
+ 
+ ### Mostrar solo las últimas 100 lineas
+ ```js
+ docker-compose logs --tail 100 nombre_docker
+ ```
+ 
+ 
+ 
+ 
+ 
  podemos también agregar el parametro -f  para dejar una terminal abierta y monitorear en tiempo real lo que suceda.
  
  ```js
