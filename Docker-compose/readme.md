@@ -288,7 +288,7 @@ Si todo fue bien, con estos pasos se debió haber importado la base de datos
 Aunque no es correcto indicar un password en la linea de comandos, ya que queda registrado, lo correcto sería usar una variable en el archivo .env, como se muestra en el ejemplo de abajo.
 
 
-```js
+```php
 docker-compose exec nombre_container /usr/bin/mysqldump -u root --password="$MYSQL_PASSWORD" nombre_basededatos > archivo_backup.sql
 ```
 
