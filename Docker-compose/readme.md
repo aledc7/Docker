@@ -274,7 +274,10 @@ cd /bak/
 3 - Luego dentro de la carpeta, verificar que se vea el archivo .sql  que queremos importar, y ejecutar el siguiente comando:
 
 ```php
+mysql -u root -password mi_password nombre_base_datos < archivo_con_la_base.sql
+````
 
+Si todo fue bien, con estos pasos se debió haber importado la base de datos
 
 
 
