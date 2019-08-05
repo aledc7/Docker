@@ -260,6 +260,26 @@ cat backup.sql | docker exec -i Nombre_CONTAINER /usr/bin/mysql -u root --passwo
 ```
 
 
+# Importando una base de datos en la terminal
+
+1 - Primeramente se debe tener el archivo __.sql__ en la carpeta del volumen compartido del Docker
+2 - Una vez con el archivo en esta carpeta, se debera entrar al docker que tenga la base de datos con este comando:
+```php
+docker-compose exec nombre_container bash
+````
+Una vez entremos en la terminal del Docker, se deberá primero acceder a la carpeta del volumen mapeado, en este ejemplo es BAK
+```php
+cd /bak/
+````
+3 - Luego dentro de la carpeta, verificar que se vea el archivo .sql  que queremos importar, y ejecutar el siguiente comando:
+
+```php
+
+
+
+
+
+
 
 
 Aunque no es correcto indicar un password en la linea de comandos, ya que queda registrado, lo correcto sería usar una variable en el archivo .env, como se muestra en el ejemplo de abajo.
