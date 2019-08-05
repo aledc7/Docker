@@ -255,6 +255,9 @@ Por ejemplo, si quisieramos monitorear el contendor de redis deberiamos poner:
  # Para Backup
 docker exec CONTAINER /usr/bin/mysqldump -u root --password=mi_password nombre_base > backup.sql
 
+# Aca igual que arriba pero poniendile al archivo el nombre con la fecha y hora
+docker exec CONTAINER /usr/bin/mysqldump -u root --password=mi_password nombre_base > $(date "+%b_%d_%Y_%H_%M_%S").sql
+
 # Para hacer Restore
 cat backup.sql | docker exec -i Nombre_CONTAINER /usr/bin/mysql -u root --password=mi_password nombre_base
 ```
