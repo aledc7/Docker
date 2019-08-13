@@ -34,7 +34,7 @@ agrego el usuario al grupo docker
 ```
 sudo usermod -aG docker mi_usuario
 ```
-
+NOTA: si se está corriendo docker en una maquina virtual, es necesario reiniciar para que tome los cambios
 
 
 
