@@ -114,7 +114,7 @@ docker rmi
 docker exec -u 0 -it nombre_docker /bin/bash
 ```
 
-## Acceder al basj de docker como root en caso que el docker no tenga bash
+## Acceder al bash de docker como root en caso que el docker no tenga bash
 ```
 docker exec -u 0 -it nombre_docker /busybox ash (en caso de que el docker no tenba bash)
 ```
