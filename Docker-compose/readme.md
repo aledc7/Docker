@@ -304,6 +304,30 @@ docker-compose exec nombre_container /usr/bin/mysqldump -u root --password="$MYS
 Tener en cuenta que para que me funcione el ejemplop de arriba, debo tener un archivo .env con la variable definida MYSQL_PASSWORD = aca_va_la_contraseña
 
 
+# Crear Script para hacer ejecutar un backup automaticpo con CRON
+
+En caso de que queramos automatizar un backup mediante CRONTAB, el script debe ser un poco diferente, ya que si queremos correr un script normal, crontab no lo ejecutará.
+
+Ejemplo de SCRIPT para CRONTAB, probado y funcional:
+
+```php
+#!/bin/bash
+
+# Para que tome el docker-compose es necesario incluir este path
+PATH=/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin
+
+# path en donde se encuentra el docker-compose.yml
+cd /home/aledc/software/systems/
+
+# Comnando que hace el backup de un conenedor en produccion y guarda la base de datos comprimida
+# y le pone como nombre de archivo la fecha y hora
+
+docker-compose exec -T db /usr/bin/mysqldump -u root --password=MiPa$word nombre_base | gzip -9 > /home/aledc/backups/$(date "+%b_%d_%Y_%H_%M_%S").sql.gz
+````
+
+
+
+
  
  
 
