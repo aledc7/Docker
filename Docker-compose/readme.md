@@ -325,7 +325,11 @@ cd /home/aledc/software/systems/
 docker-compose exec -T db /usr/bin/mysqldump -u root --password=MiPa$word nombre_base | gzip -9 > /home/aledc/backups/$(date "+%b_%d_%Y_%H_%M_%S").sql.gz
 ````
 
+Si por alguna razón, crontab no ejecuta el script a la hora indicada, esto puede solucionarse reiniciando el servicio
 
+```php
+sudo /etc/init.d/cron restart
+````
 
 
  
